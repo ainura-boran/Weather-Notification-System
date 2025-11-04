@@ -2,6 +2,7 @@ package app;
 
 import data.WeatherInfo;
 import data.WeatherStation;
+import factory.ObserverFactory;
 import observers.DisplayBoard;
 import observers.EmailNotifier;
 import observers.MobileApp;
@@ -15,9 +16,9 @@ import java.util.Scanner;
 public class WeatherController {
     public WeatherStation buildDefaultStation() {
         WeatherStation ws = new WeatherStation(new RealTimePollingStrategy());
-        ws.attach(new MobileApp("Ainur"));
-        ws.attach(new EmailNotifier("ainur@mail.ru"));
-        ws.attach(new DisplayBoard("board-1"));
+        ws.attach(ObserverFactory.create("mobile", "Ainur"));
+        ws.attach(ObserverFactory.create("email", "ainur@mail.ru"));
+        ws.attach(ObserverFactory.create("board", "board-1"));
         return ws;
     }
 

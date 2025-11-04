@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Iterator;
 
 public class ScheduledBatchStrategy implements UpdateStrategy {
-
     private final Iterator<WeatherInfo> it;
     private WeatherInfo last;
 
