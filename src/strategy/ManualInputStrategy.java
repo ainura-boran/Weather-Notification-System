@@ -1,27 +1,22 @@
 package strategy;
 
-import data.WeatherData;
+import data.WeatherInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.Supplier;
 
 public class ManualInputStrategy implements UpdateStrategy {
-    private final Queue<WeatherData> queue = new ConcurrentLinkedQueue<>();
+    private final Supplier<WeatherInfo> supplier;
+    private WeatherInfo last;
 
-    public void offer(WeatherData data) {
-        if (data != null)
-            queue.offer(data);
+    public ManualInputStrategy(Supplier<WeatherInfo> supplier) {
+        this.supplier = supplier;
     }
 
     @Override
-    public Iterable<WeatherData> fetch() {
-        List<WeatherData> drained = new ArrayList<>();
-        WeatherData d;
-        while ((d = queue.poll()) != null)
-            drained.add(d);
-        return drained;
+    public WeatherInfo fetch() {
+        WeatherInfo d = supplier.get();
+        if (d != null) last = d;
+        return (d != null) ? d : last;
     }
 
     @Override

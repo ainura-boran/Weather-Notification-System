@@ -1,7 +1,7 @@
 package strategy;
-import data.WeatherData;
+import data.WeatherInfo;
 
 public interface UpdateStrategy {
-    Iterable<WeatherData> fetch();
+    WeatherInfo fetch();
     String name();
 }

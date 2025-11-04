@@ -1,8 +1,7 @@
 package observers;
 
-import data.WeatherData;
+import data.WeatherInfo;
 
 public interface WeatherObserver {
-    String name();
-    void onWeather(WeatherData data);
+    void onWeather(WeatherInfo data);
 }
